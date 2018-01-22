@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/MicrosoftLearning/20535-ArchitectingMicrosoftAzureSolutions/tree/master.svg?style=svg)](https://circleci.com/gh/MicrosoftLearning/20535-ArchitectingMicrosoftAzureSolutions/tree/master)
 
-- **[Download Latest Student Handbook and AllFiles Content](https://github.com/MicrosoftLearning/20532-DevelopingMicrosoftAzureSolutions/releases/latest)**
+- **[Download Latest Student Handbook and AllFiles Content](https://github.com/MicrosoftLearning/20535-ArchitectingMicrosoftAzureSolutions/releases/latest)**
 - **Want to see latest changes?** - Check out our [Changelog](changelog.md)
 - **Thinking of Contributing?** - Check our our [Contributor Guide](.guides/contributor_guide.md)
 - **Are you a MCT?** - Have a look at our [GitHub User Guide for MCTs](.guides/mct_guide.md)
