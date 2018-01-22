@@ -89,30 +89,16 @@ function createAllFilesZip(callback) {
 }
 
 function cleanup() {
-    console.log('Cleaing Up Temporary Folders');
+    console.log('Cleaning Up Temporary Folders');
     del.sync([tempDirectory]);
 }
 
 function buildDocx(markdownPath, baseFileName) {
-    var htmlFilePath = createHtmlFile(markdownPath, baseFileName + '.html');
-    var docxFilePath = createDocxFile(htmlFilePath, baseFileName + '.docx');
-    deleteHtmlFile(htmlFilePath);
+    var docxFilePath = createDocxFile(markdownPath, baseFileName + '.docx');
     return docxFilePath;
 }
 
-function createHtmlFile(markdownPath, newFileName) {
-    var markdownString = fs.readFileSync(markdownPath, 'utf8');
-    var htmlString = marked(markdownString);
+function createDocxFile(markdownFile, newFileName) {
     var outPath = path.join(docsTempDirectory, newFileName);
-    fs.writeFileSync(outPath, htmlString);
-    return outPath;
-}
-
-function deleteHtmlFile(htmlPath) {
-    fs.unlinkSync(htmlPath);
-}
-
-function createDocxFile(htmlPath, newFileName) {
-    var outPath = path.join(docsTempDirectory, newFileName);
-    cp.execFileSync('pandoc', [htmlPath, '--reference-doc=template.docx', '-o', outPath]);
+    cp.execFileSync('pandoc', [markdownFile, 'attribution.md', '--reference-doc=template.docx', '-o', outPath]);
 }

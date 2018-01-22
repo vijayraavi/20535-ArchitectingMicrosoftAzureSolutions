@@ -1,0 +1,77 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "functionAppName": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 12,
+            "metadata": {
+                "description": "The name of the function app that you wish to create."
+            }
+        }
+    },
+    "variables": {
+        "funcName": "[parameters('functionAppName')]",
+        "storName": "[concat('stor', uniqueString(resourceGroup().id))]",
+        "planName": "[concat('plan', uniqueString(resourceGroup().id))]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-06-15",
+            "name": "[variables('storName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "accountType": "Standard_LRS"
+            }
+        },
+        {
+            "apiVersion": "2016-09-01",
+            "name": "[variables('planName')]",
+            "type": "Microsoft.Web/serverfarms",
+            "location": "[resourceGroup().location]"
+        },
+        {
+            "apiVersion": "2016-08-01",
+            "type": "Microsoft.Web/sites",
+            "name": "[variables('funcName')]",
+            "location": "[resourceGroup().location]",
+            "kind": "functionapp",
+            "properties": {
+                "name": "[variables('funcName')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('planName'))]",
+                "clientAffinityEnabled": false,
+                "siteConfig": {
+                    "alwaysOn": true
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('planName'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storName'))]"
+            ],
+            "resources": [
+                {
+                    "apiVersion": "2016-08-01",
+                    "name": "appsettings",
+                    "type": "config",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/sites', variables('funcName'))]",
+                        "[resourceId('Microsoft.Storage/storageAccounts', variables('storName'))]"
+                    ],
+                    "properties": {
+                        "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storName')), '2015-05-01-preview').key1,';')]",
+                        "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storName')), '2015-05-01-preview').key1,';')]",
+                        "FUNCTIONS_EXTENSION_VERSION": "~1"
+                    }
+                }
+            ]
+        }
+    ],
+    "outputs": {
+        "url": {
+            "type": "string",
+            "value": "[concat('https:\/\/', reference(concat('Microsoft.Web/sites/', variables('funcName')), '2015-04-01').defaultHostName)]"
+        }
+    }
+}
