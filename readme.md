@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/MicrosoftLearning/20535-ArchitectingMicrosoftAzureSolutions/tree/master.svg?style=svg)](https://circleci.com/gh/MicrosoftLearning/20535-ArchitectingMicrosoftAzureSolutions/tree/master)
 
-- **[Download Latest Student Handbook and AllFiles Content](https://github.com/MicrosoftLearning/20535-ArchitectingMicrosoftAzureSolutions/releases/latest)**
+- **[Download Latest Student Handbook and AllFiles Content](https://github.com/MicrosoftLearning/20535-ArchitectingMicrosoftAzureSolutions/releases)**
 - **Are you a MCT?** - Have a look at our [GitHub User Guide for MCTs](.github/CONTRIBUTING.md)
 
 ## What are we doing?
