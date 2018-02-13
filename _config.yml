@@ -1,4 +1,4 @@
-title: '20535A: Architecting Microsoft Azure Solutions'
+title: '20535: Architecting Microsoft Azure Solutions'
 remote_theme: azure-immersion/docs-jekyll-theme
 exclude:
   - readme.md
