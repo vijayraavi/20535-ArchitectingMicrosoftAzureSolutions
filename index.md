@@ -1,6 +1,7 @@
 ---
 title: Online Hosted Instructions
 permalink: index.html
+layout: home
 ---
 
 Hyperlinks to each of 20535’s lab exercises are listed below.
