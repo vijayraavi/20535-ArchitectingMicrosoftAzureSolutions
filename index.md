@@ -3,6 +3,8 @@ title: Online Hosted Instructions
 permalink: index.html
 ---
 
+Links to each of 20535’s lab exercises are listed in the below table:
+
 | Module | Activity |
 | --- | --- |
 | Module 2: Deploying Resources with Azure Resource Manager | [Lab: Getting Started with Azure Resource Manager](Instructions/Labs/Mod02/20535A_LAB_AK_02.md) |
